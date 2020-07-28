@@ -1,7 +1,17 @@
-const path = require('path');
+
+// node modules
 const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
+const path = require('path');
+
+
+// webpack plugins
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+// config files
+const common = require('./webpack.common');
+
 
 module.exports = merge(common, {
     mode: "development",
@@ -12,18 +22,49 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     // devServer: {
     //     contentBase: './dist',
+    //     hot: true,
     // },
     module: {
         rules: [
-
+            {
+                test: /\.html$/i,
+                loader: 'html-loader',
+            },
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader',
-                ],
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            removeCR: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
             },
+            {
+                test: /\.(png|jpe?g|gif|svg|webp)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                    // outputPath: 'images/', // file pack output path, is relative path for `dist`
+                    // publicPath: '/images/', // css file will use, is absolute path for server
+                },
+            }
         ],
     },
 
@@ -33,6 +74,8 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         }),
+
+        new DashboardPlugin(),
 
     ]
 });
