@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const form = document.getElementById('form');
 const emailInput = document.getElementById('email');
-const iconError = document.getElementById('icon-error');
+// const iconError = document.getElementById('icon-error');
 const emailError = document.getElementById('error-msg');
 
 
@@ -19,7 +19,7 @@ emailInput.addEventListener("input", function (event) {
         // is valid, we remove the error message.
         emailError.innerHTML = ''; // Reset the content of the message
         emailError.className = 'error-msg'; // Reset the visual state of the message
-        iconError.className = 'icon-error'; // Reset the visual state of the message
+        // iconError.className = 'icon-error'; // Reset the visual state of the message
     } else {
         // If there is still an error, show the correct error
         showError();
@@ -28,9 +28,10 @@ emailInput.addEventListener("input", function (event) {
 });
 
 form.addEventListener('submit', (event) => {
+
     // if the email field is valid, we let the form submit
 
-    if (!email.validity.valid) {
+    if (!emailInput.value || emailInput.value.trim().length === 0 || !email.validity.valid) {
         // If it isn't, we display an appropriate error message
         showError();
         // Then we prevent the form from being sent by canceling the event
@@ -41,7 +42,7 @@ form.addEventListener('submit', (event) => {
 
 
 function showError() {
-    if (email.validity.valueMissing) {
+    if (!emailInput.value || emailInput.value.trim().length === 0) {
         // If the field is empty
         // display the following error message.
         emailError.textContent = 'You need to enter an e-mail address.';
@@ -56,6 +57,6 @@ function showError() {
     }
 
     // Set the styling appropriately
-    emailError.className = 'error-msg active';
-    iconError.className = 'icon-error active';
+    emailError.className = 'error-msg';
+    // iconError.className = 'icon-error active';
 }

@@ -52,18 +52,23 @@ body {
 
   .logo {
     grid-area: logo;
-    margin: 65px 0 0 167px;
+    width: 80%;
+    max-width: 450px;
+    margin: 65px auto 0 auto;
+    // margin: 65px 0 0 167px;
   }
 
   .content {
     grid-area: content;
-
-    padding: 0 167px;
+    width: 80%;
+    max-width: 450px;
+    margin: 0 auto;
+    // padding: 0 0 0 167px;
 
 
 
     h1 {
-      margin-top: 138px;
+      margin-top: 80px;
       text-transform: uppercase;
       font-size: 4rem;
       line-height: 4.3rem;
@@ -79,118 +84,111 @@ body {
 
     p {
       margin-top: 40px;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     .form {
+      position: relative;
+
+      // &.error {
+      //   .email-box {
+      //     border: 2px solid $soft-red;
+      //   }
+
+      //   .icon-error {
+      //     display: inline;
+      //   }
+
+      //   .error-msg {
+      //     display: block;
+      //   }
+
+      // }
 
 
-      &.error {
-        .email-box {
-          border: 2px solid $soft-red;
-        }
 
-        .icon-error {
-          display: inline;
-        }
 
-        .error-msg {
-          display: block;
-        }
+      label {
 
-      }
-
-      .icon-error {
-        display: none;
-        float: inline-end;
-        margin-right: 100px;
-
-        &.active {
-          display: block;
-        }
-      }
-
-      .email-box {
-        position: relative;
-        border: 1px solid $desaturated-red;
-        border-radius: 50px;
-        padding: 16px 32px;
-        height: 56px;
 
         .email-input {
-          width: 80%;
-          color: $dark-grayish-red;
+          height: 56px;
+          width: 100%;
+          padding: 16px 150px 16px 32px;
           background-color: transparent;
+          color: $dark-grayish-red;
+          border: 1px solid $desaturated-red;
+          border-radius: 50px;
+          margin-bottom: 16px;
 
           &::placeholder {
             color: $desaturated-red;
           }
+
+          &:invalid {
+            border: 2px solid $soft-red;
+          }
+
+          &:focus:invalid {
+            border: 1px solid $desaturated-red;
+          }
+
+          &:invalid+.icon-error {
+            display: inline;
+          }
+
+          &:focus:invalid+.icon-error {
+            display: none;
+          }
+
+          &:valid+.icon-error {
+            display: none;
+          }
+
+
+
         }
 
-        // .email-input+span {
-        //   position: relative;
-        // }
-
-        // .email-input+span::before {
-        //   position: absolute;
-        //   right: -20px;
-        //   top: 5px;
-        // }
-
-        // .email-input:invalid {
-        //   border: 2px solid red;
-        // }
-
-        // .email-input:invalid+span::before {
-        //   content: '✖';
-        //   color: red;
-        // }
-
-        // .email-input:valid+span::before {
-        //   content: '✓';
-        //   color: green;
-        // }
-
-
-
-
-
-        .submit-btn {
+        .icon-error {
+          display: none;
           position: absolute;
-          right: -3px;
-          top: -2px;
-          background: $linear-2;
-          width: 100px;
-          height: 56px;
-
-          border-radius: 30px;
-          box-shadow: 0 15px 15px hsla(5, 50%, 70%, 0.3);
-          transition: all 0.3s ease-in-out;
-
-          &:hover {
-            background-color: hsla(359, 87%, 91%, 1);
-            box-shadow: 0 20px 15px hsla(5, 50%, 70%, 0.5);
-            scale: 1.05;
-          }
-
-          img {
-            margin: 0 auto;
-          }
+          right: 120px;
+          top: 15px;
         }
 
-      }
-
-      .error-msg {
-        color: $soft-red;
-        font-size: small;
-        margin-left: 30px;
-        margin-top: 8px;
-        display: none;
-
-        &.active {
-          display: block;
+        .error-msg {
+          position: relative;
+          color: $soft-red;
+          font-size: small;
+          margin-left: 30px;
         }
       }
+
+      .submit-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: $linear-2;
+        width: 100px;
+        height: 56px;
+
+        border-radius: 30px;
+        box-shadow: 0 15px 15px hsla(5, 50%, 70%, 0.3);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background-color: hsla(359, 87%, 91%, 1);
+          box-shadow: 0 20px 15px hsla(5, 50%, 70%, 0.5);
+          scale: 1.05;
+        }
+
+        img {
+          margin: 0 auto;
+        }
+      }
+
+
+
     }
   }
 
@@ -206,7 +204,15 @@ body {
 
 
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
+  h1 {
+    margin-top: 138px;
+  }
+
+  p {
+    margin-bottom: 50px;
+  }
+}
 
 @media (max-width: 375px) {
   body {
@@ -249,29 +255,38 @@ body {
       }
 
       .form {
+        margin-bottom: 20px;
 
-        .email-box {
-          height: 50px;
-          padding: 14px 23px;
+        label {
 
           .email-input {
-            font-size: 0.9rem;
-            // &::placeholder {
-            //   font-size: 0.9rem;
-            // }
-          }
-
-          .submit-btn {
-
-            right: -1px;
-            top: -1px;
-            background: linear-gradient(135deg, #f8bfbf, #ee8c8c);
-            width: 65px;
             height: 50px;
-
+            padding: 14px 100px 14px 23px;
+            font-size: 0.9rem;
           }
+
+          .icon-error {
+            right: 70px;
+          }
+
+          .error-msg {
+            margin: 0 auto;
+            text-align: center;
+            display: block;
+          }
+
+        }
+
+        .submit-btn {
+          right: 0;
+          top: 0;
+          background: linear-gradient(135deg, #f8bfbf, #ee8c8c);
+          width: 65px;
+          height: 50px;
+
         }
       }
     }
+
   }
 }

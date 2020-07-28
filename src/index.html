@@ -37,15 +37,15 @@
         </p>
 
         <form action="#" method="POST" class="form" id="form" novalidate>
-          <div class="email-box">
+          <!-- <div class="email-box"> -->
+          <label for="email">
             <input
+              value=""
               type="email"
               name="email"
               id="email"
               class="email-input"
               placeholder="Email Address"
-              required
-              minlength="8"
             />
             <img
               src="/images/icon-error.svg"
@@ -53,11 +53,12 @@
               class="icon-error"
               id="icon-error"
             />
-            <button type="submit" class="submit-btn">
-              <img src="/images/icon-arrow.svg" alt="ico arrow" />
-            </button>
-          </div>
-          <span class="error-msg" id="error-msg" aria-live="polite"></span>
+            <span class="error-msg" id="error-msg" aria-live="polite"></span>
+          </label>
+          <button type="submit" class="submit-btn">
+            <img src="/images/icon-arrow.svg" alt="ico arrow" />
+          </button>
+          <!-- </div> -->
         </form>
       </div>
 
